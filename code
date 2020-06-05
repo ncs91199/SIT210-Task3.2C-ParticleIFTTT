@@ -1,0 +1,23 @@
+int photoSensor = A5;
+int SensorPower = A0;
+
+void setup() {
+pinMode(photoSensor, INPUT);
+pinMode(SensorPower, OUTPUT);
+
+digitalWrite(SensorPower, HIGH);
+}
+
+void loop() {
+
+int lightmeasure = analogRead(photoSensor);
+int n = 200;
+
+if(lightmeasure > n)
+Particle.publish("Sun hitted", "Sunlight", PRIVATE);
+if(lightmeasure < n)
+Particle.publish("Sun is not there", "No Sunlight", PRIVATE);
+
+delay(5000);
+
+}
